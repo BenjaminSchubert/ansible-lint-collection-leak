@@ -1,0 +1,13 @@
+namespace: benschubert
+name: ansible_lint_repro
+version: 0.0.0
+readme: README.md
+authors:
+  - Benjamin Schubert <contact@benschubert.me>
+repository: https://github.com/BenjaminSchubert/ansible-lint-repro
+description: your collection description
+license:
+  - MIT
+
+dependencies:
+  kubernetes.core: ">=2.2.0"
