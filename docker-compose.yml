@@ -1,0 +1,33 @@
+version: "3.7"
+
+x-template: &template
+  command: bash -c 'ansible-lint |& tee /dev/stderr | (grep --color=always WARNING && exit 1 || exit 0)'
+  volumes:
+    - ./:/src:rw,z
+
+
+services:
+  # Collections installed globally using the `ansible` package, this works
+  ansible:
+    <<: *template
+
+    build:
+      context: .
+      target: full
+
+  # Collections installed manually via galaxy and ansible-core
+  ansible-core-and-collection:
+    <<: *template
+
+    build:
+      context: .
+      target: core-and-collections
+
+  # /!\
+  # No collections installed globally, this fails to find kubernetes.core.helm
+  ansible-core-only:
+    <<: *template
+
+    build:
+      context: .
+      target: core-only
